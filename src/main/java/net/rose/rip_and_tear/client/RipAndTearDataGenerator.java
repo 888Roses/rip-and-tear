@@ -11,5 +11,6 @@ public class RipAndTearDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(RipAndTearModelGenerator::new);
         pack.addProvider(RipAndTearDamageTypeProvider::new);
         pack.addProvider(RipAndTearLangGenerator::new);
+        pack.addProvider(RipAndTearSoundGenerator::new);
     }
 }

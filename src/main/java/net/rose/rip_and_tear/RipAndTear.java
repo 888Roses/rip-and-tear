@@ -14,6 +14,8 @@ public class RipAndTear implements ModInitializer {
         ModItemGroups.initialize();
         ModEntities.initialize();
         ModComponents.initialize();
+        ModSoundEvents.initialize();
+        ModParticleTypes.initialize();
     }
 
     public static Identifier id(String path) {

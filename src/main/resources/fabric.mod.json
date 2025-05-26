@@ -18,14 +18,26 @@
     ],
     "main": [
       "net.rose.rip_and_tear.RipAndTear"
+    ],
+    "cardinal-components-block": [
+      "net.rose.rip_and_tear.content.ModBlockComponents"
+    ],
+    "cardinal-components-entity": [
+      "net.rose.rip_and_tear.content.ModEntityComponents"
+    ],
+    "cardinal-components-world": [
+      "net.rose.rip_and_tear.content.ModWorldComponents"
     ]
   },
   "mixins": [
     "rip_and_tear.mixins.json"
   ],
+  "accessWidener": "rip_and_tear.accesswidener",
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "fabricloader": "*",
+    "minecraft": "~1.21.5",
+    "java": ">=21",
+    "fabric-api": "*",
+    "strawberrylib": "*"
   }
 }
