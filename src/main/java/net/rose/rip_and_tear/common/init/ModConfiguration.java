@@ -13,6 +13,7 @@ public class ModConfiguration {
     public static final float THROWN_WARPER_RECALL_PARTICLE_SPREAD = 0.1f;
     public static final float WARPER_PROJECTILE_TELEPORT_SOUND_PITCH_MIN = 0.75f;
     public static final float WARPER_PROJECTILE_TELEPORT_SOUND_PITCH_MAX = 1.25f;
+    public static final float WARPER_SWING_SOUND_VOLUME = 0.35F;
 
     public static final float CHARTER_SKULL_PARTICLE_HORIZONTAL_VELOCITY = 0.001f;
     public static final float CHARTER_SKULL_PARTICLE_VERTICAL_VELOCITY_MIN = 0.0075f;

@@ -23,6 +23,13 @@ public class RipAndTearSoundProvider extends FabricSoundsProvider {
                         .sound(SoundTypeBuilder.EntryBuilder.ofFile(RipAndTear.id("item/warper/warp")))
                         .subtitle("subtitles.rip_and_tear.item.warper.warp")
         );
+
+        soundExporter.add(
+                ModSoundEvents.WARPER_SWING,
+                SoundTypeBuilder.of(ModSoundEvents.WARPER_SWING)
+                        .sound(SoundTypeBuilder.EntryBuilder.ofFile(RipAndTear.id("item/warper/swing")))
+                        .subtitle("subtitles.rip_and_tear.item.warper.swing")
+        );
     }
 
     @Override

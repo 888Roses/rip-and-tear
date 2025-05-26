@@ -17,6 +17,9 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import net.minecraft.util.Hand;
 import net.minecraft.item.Item;
+import net.rose.rip_and_tear.common.init.ModSoundEvents;
+import net.rose.rip_and_tear.common.util.Mathf;
+import net.rose.rip_and_tear.common.util.SoundUtil;
 
 public class ThrownWarperItem extends Item {
     public ThrownWarperItem(Settings settings) {
@@ -65,7 +68,17 @@ public class ThrownWarperItem extends Item {
             var damageSource = warperProjectileEntity.getDamageSource(serverWorld);
             serverWorld.getEntitiesByType(
                     TypeFilter.instanceOf(Entity.class), entityHurtBox,
-                    x -> x.damage(serverWorld, damageSource, THROWN_WARPER_RECALL_DAMAGE)
+                    x -> {
+                        var hasDamaged = x.damage(serverWorld, damageSource, THROWN_WARPER_RECALL_DAMAGE);
+
+                        SoundUtil.playSound(
+                                serverWorld, null, x.getPos(),
+                                ModSoundEvents.WARPER_SWING, user.getSoundCategory(),
+                                WARPER_SWING_SOUND_VOLUME, Mathf.random(serverWorld, 0.9F, 1.1F)
+                        );
+
+                        return hasDamaged;
+                    }
             );
 
             // endregion

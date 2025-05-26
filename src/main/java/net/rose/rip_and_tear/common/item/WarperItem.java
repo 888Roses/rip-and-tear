@@ -1,13 +1,13 @@
 package net.rose.rip_and_tear.common.item;
 
 import static net.rose.rip_and_tear.common.init.ModConfiguration.WARPER_HIT_PARTICLES_SPREAD;
+import static net.rose.rip_and_tear.common.init.ModConfiguration.WARPER_SWING_SOUND_VOLUME;
+
 import net.rose.rip_and_tear.common.entity.projectile.WarperProjectileEntity;
-import net.rose.rip_and_tear.common.init.ModParticleTypes;
+import net.rose.rip_and_tear.common.init.*;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.rose.rip_and_tear.common.init.ModComponents;
-import net.rose.rip_and_tear.common.init.ModEntities;
+import net.rose.rip_and_tear.common.util.Mathf;
 import net.rose.rip_and_tear.common.util.SoundUtil;
-import net.rose.rip_and_tear.common.init.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.entity.LivingEntity;
@@ -63,6 +63,12 @@ public class WarperItem extends Item {
     public void postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         super.postHit(stack, target, attacker);
         if (!(attacker.getWorld() instanceof ServerWorld serverWorld)) return;
+
+        SoundUtil.playSound(
+                serverWorld, null, attacker.getPos(),
+                ModSoundEvents.WARPER_SWING, attacker.getSoundCategory(),
+                WARPER_SWING_SOUND_VOLUME, Mathf.random(serverWorld, 0.9F, 1.1F)
+        );
 
         var dir = target.getPos().subtract(attacker.getPos()).normalize();
         var pos = target.getPos().add(0, 1.35F, 0).add(dir.multiply(-0.25F));
