@@ -8,5 +8,8 @@ public class RipAndTearDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+        pack.addProvider(RipAndTearModelGenerator::new);
+        pack.addProvider(RipAndTearDamageTypeProvider::new);
+        pack.addProvider(RipAndTearLangGenerator::new);
     }
 }
