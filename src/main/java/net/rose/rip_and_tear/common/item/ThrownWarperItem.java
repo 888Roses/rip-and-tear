@@ -23,6 +23,9 @@ import net.rose.rip_and_tear.common.init.ModSoundEvents;
 import net.rose.rip_and_tear.common.util.Mathf;
 import net.rose.rip_and_tear.common.util.SoundUtil;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class ThrownWarperItem extends Item {
     public ThrownWarperItem(Settings settings) {
         super(settings);
@@ -39,6 +42,8 @@ public class ThrownWarperItem extends Item {
                                PlayerEntity user) {
         var startingPosition = warperProjectileEntity.getPos();
         var destinationPosition = user.getPos().add(0, 0.25F, 0);
+
+        var hitEntityList = new ArrayList<UUID>();
 
         Mathf.inLine(
                 startingPosition, destinationPosition,
@@ -72,6 +77,13 @@ public class ThrownWarperItem extends Item {
                     serverWorld.getEntitiesByType(
                             TypeFilter.instanceOf(Entity.class), entityHurtBox,
                             x -> {
+                                // Prevents an entity from being hit twice by the dagger.
+                                var uuid = x.getUuid();
+                                if (hitEntityList.contains(uuid)) {
+                                    return false;
+                                }
+
+                                hitEntityList.add(uuid);
                                 var hasDamaged = x.damage(serverWorld, damageSource, THROWN_WARPER_RECALL_DAMAGE);
 
                                 SoundUtil.playSound(
