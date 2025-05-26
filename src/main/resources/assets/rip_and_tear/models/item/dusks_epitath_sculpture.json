@@ -1,0 +1,6 @@
+{
+  "parent": "rip_and_tear:item/handheld_large",
+  "textures": {
+    "layer0": "rip_and_tear:item/dusks_epitath_sculpture"
+  }
+}

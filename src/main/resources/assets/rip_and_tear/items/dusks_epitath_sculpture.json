@@ -1,0 +1,23 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "rip_and_tear:item/dusks_epitath_sculpture_gui"
+        },
+        "when": [
+          "gui",
+          "ground",
+          "fixed"
+        ]
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "rip_and_tear:item/dusks_epitath_sculpture"
+    },
+    "property": "minecraft:display_context"
+  }
+}

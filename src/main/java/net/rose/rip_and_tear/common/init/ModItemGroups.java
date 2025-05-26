@@ -8,5 +8,9 @@ public class ModItemGroups {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(itemGroup -> {
             itemGroup.add(ModItems.WARPER);
         });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(itemGroup -> {
+            itemGroup.add(ModItems.DUSKS_EPITATH_SCULPTURE);
+        });
     }
 }

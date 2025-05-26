@@ -2,6 +2,7 @@ package net.rose.rip_and_tear.data.providers;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.rose.rip_and_tear.common.init.ModEntities;
 import net.rose.rip_and_tear.common.init.ModItems;
 import net.minecraft.registry.RegistryWrapper;
 
@@ -17,6 +18,9 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
     public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup,
                                      TranslationBuilder translationBuilder) {
         translationBuilder.add(ModItems.WARPER, "Warper");
-        translationBuilder.add(ModItems.THROWN_WARPER, "Warper (Thrown)");
+        translationBuilder.add(ModItems.THROWN_WARPER, "Thrown Warper");
+        translationBuilder.add(ModItems.DUSKS_EPITATH_SCULPTURE, "Sculpture of Dusk's Epitath");
+
+        translationBuilder.add(ModEntities.WARPER, "Thrown Warper");
     }
 }
