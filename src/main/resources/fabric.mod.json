@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "rip_and_tear",
+  "version": "${version}",
+  "name": "Rip And Tear",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/rip_and_tear/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.rose.rip_and_tear.client.RipAndTearDataGenerator"
+    ],
+    "client": [
+      "net.rose.rip_and_tear.client.RipAndTearClient"
+    ],
+    "main": [
+      "net.rose.rip_and_tear.RipAndTear"
+    ]
+  },
+  "mixins": [
+    "rip_and_tear.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
