@@ -11,22 +11,22 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "net.rose.rip_and_tear.client.RipAndTearDataGenerator"
+      "net.rose.rip_and_tear.data.RipAndTearDataGenerator"
     ],
     "client": [
       "net.rose.rip_and_tear.client.RipAndTearClient"
     ],
     "main": [
-      "net.rose.rip_and_tear.RipAndTear"
+      "net.rose.rip_and_tear.common.RipAndTear"
     ],
     "cardinal-components-block": [
-      "net.rose.rip_and_tear.content.ModBlockComponents"
+      "net.rose.rip_and_tear.common.init.ModBlockComponents"
     ],
     "cardinal-components-entity": [
-      "net.rose.rip_and_tear.content.ModEntityComponents"
+      "net.rose.rip_and_tear.common.init.ModEntityComponents"
     ],
     "cardinal-components-world": [
-      "net.rose.rip_and_tear.content.ModWorldComponents"
+      "net.rose.rip_and_tear.common.init.ModWorldComponents"
     ]
   },
   "mixins": [
