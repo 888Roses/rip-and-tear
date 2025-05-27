@@ -1,3 +1,8 @@
+/*
+ * TODO
+ *  - Soul candles: mixin that makes candles have blue flames when placed on deepslate related blocks.
+ */
+
 package net.rose.rip_and_tear.common;
 
 import moriyashiine.strawberrylib.api.SLib;
