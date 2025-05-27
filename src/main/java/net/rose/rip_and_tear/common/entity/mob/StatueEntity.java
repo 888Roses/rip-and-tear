@@ -2,14 +2,15 @@ package net.rose.rip_and_tear.common.entity.mob;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.rose.rip_and_tear.common.components.entity.StatueComponent;
+import net.rose.rip_and_tear.common.init.ModEntityComponents;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 import java.util.UUID;
@@ -17,62 +18,38 @@ import java.util.UUID;
 public class StatueEntity extends MobEntity {
     public static final Object2BooleanMap<UUID> SLIM_STATUSES = new Object2BooleanOpenHashMap<>();
 
-    public EntityPose forcedPose = EntityPose.STANDING;
-    public float forcedHeadYaw = 0, forcedBodyYaw = 0, forcedPitch = 0, forcedLimbSwingAnimationProgress = 0, forcedLimbSwingAmplitude = 0;
-    public int forcedClientAge = 0;
 
-    public static final TrackedData<Boolean> SLIM = DataTracker.registerData(StatueEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    public static final TrackedData<Boolean> SLIM = DataTracker.registerData(StatueEntity.class,
+            TrackedDataHandlerRegistry.BOOLEAN);
 
     public StatueEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
         setPersistent();
+
         setBodyYaw(MathHelper.nextFloat(world.getRandom(), -10F, 10F));
         setHeadYaw(MathHelper.nextFloat(world.getRandom(), -10F, 10F));
         setPitch(MathHelper.nextFloat(world.getRandom(), -10F, 10F));
-
-        this.forcedHeadYaw = this.headYaw;
-        this.forcedBodyYaw = this.bodyYaw;
-        this.forcedPitch = this.getPitch();
-        this.forcedLimbSwingAnimationProgress = MathHelper.nextFloat(world.getRandom(), -0.1F, 0.1F);
-        this.forcedLimbSwingAmplitude = MathHelper.nextFloat(world.getRandom(), -0.1F, 0.1F);
-        this.forcedClientAge = this.age;
+        ModEntityComponents.STATUE.maybeGet(this).ifPresent(StatueComponent::setValuesFromLivingEntity);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (!getWorld().isClient && SLIM_STATUSES.containsKey(getUuid())) {
-            setSlim(SLIM_STATUSES.removeBoolean(getUuid()));
-        }
-    }
 
-    @Override
-    public boolean shouldRenderName() {
-        return false;
+        if (!getWorld().isClient && SLIM_STATUSES.containsKey(getUuid()))
+            setSlim(SLIM_STATUSES.removeBoolean(getUuid()));
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         setSlim(nbt.getBoolean("Slim", false));
-        forcedHeadYaw = nbt.getFloat("forced_head_yaw", 0);
-        forcedBodyYaw = nbt.getFloat("forced_body_yaw", 0);
-        forcedPitch = nbt.getFloat("forced_pitch", 0);
-        forcedLimbSwingAnimationProgress = nbt.getFloat("forced_limb_swing_animation_progress", 0);
-        forcedLimbSwingAmplitude = nbt.getFloat("forced_limb_swing_amplitude", 0);
-        forcedClientAge = nbt.getInt("forced_client_age", 0);
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("Slim", isSlim());
-        nbt.putFloat("forced_head_yaw", forcedHeadYaw);
-        nbt.putFloat("forced_body_yaw", forcedBodyYaw);
-        nbt.putFloat("forced_pitch", forcedPitch);
-        nbt.putFloat("forced_limb_swing_animation_progress", forcedLimbSwingAnimationProgress);
-        nbt.putFloat("forced_limb_swing_amplitude", forcedLimbSwingAmplitude);
-        nbt.putInt("forcedClientAge", forcedClientAge);
     }
 
     @Override
@@ -88,4 +65,23 @@ public class StatueEntity extends MobEntity {
     public void setSlim(boolean slim) {
         dataTracker.set(SLIM, slim);
     }
+
+    // region Mob Definition
+
+    // Not a mob and not a player, since is a statue.
+    public boolean isMobOrPlayer() {
+        return false;
+    }
+
+    // Cannot receive potion effects, obviously.
+    public boolean isAffectedBySplashPotions() {
+        return false;
+    }
+
+    // Cannot be pushed around.
+    public boolean isPushable() {
+        return false;
+    }
+
+    // endregion
 }

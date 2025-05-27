@@ -37,18 +37,18 @@ public class RipAndTear implements ModInitializer {
 
         DamagePreviewEvent.registerEvent();
 
-        UseEntityCallback.EVENT.register((playerEntity, world, hand, entity, entityHitResult) -> {
-            if (!(entity instanceof StatueEntity statue)) return ActionResult.PASS;
-            var i = playerEntity.getInventory().getSelectedSlot();
-            var increment = playerEntity.isSneaking() ? 5 : -5;
-            if (i == 0) statue.forcedHeadYaw += increment;
-            else if (i == 1) statue.forcedBodyYaw += increment;
-            else if (i == 2) statue.forcedPitch += increment;
-            else if (i == 3) statue.forcedLimbSwingAnimationProgress += increment / 100F;
-            else if (i == 4) statue.forcedLimbSwingAmplitude += increment / 100f;
-            else return ActionResult.SUCCESS;
-            return ActionResult.PASS;
-        });
+        // UseEntityCallback.EVENT.register((playerEntity, world, hand, entity, entityHitResult) -> {
+        //     if (!(entity instanceof StatueEntity statue)) return ActionResult.PASS;
+        //     var i = playerEntity.getInventory().getSelectedSlot();
+        //     var increment = playerEntity.isSneaking() ? 5 : -5;
+        //     if (i == 0) statue.forcedHeadYaw += increment;
+        //     else if (i == 1) statue.forcedBodyYaw += increment;
+        //     else if (i == 2) statue.forcedPitch += increment;
+        //     else if (i == 3) statue.forcedLimbSwingAnimationProgress += increment / 100F;
+        //     else if (i == 4) statue.forcedLimbSwingAmplitude += increment / 100f;
+        //     else return ActionResult.SUCCESS;
+        //     return ActionResult.PASS;
+        // });
     }
 
     public static Identifier id(String path) {

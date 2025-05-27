@@ -39,5 +39,10 @@
     "java": ">=21",
     "fabric-api": "*",
     "strawberrylib": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "rip_and_tear:statue"
+    ]
   }
 }
