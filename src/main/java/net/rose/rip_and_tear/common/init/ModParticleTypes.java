@@ -7,6 +7,7 @@ import net.minecraft.particle.SimpleParticleType;
 public class ModParticleTypes {
     public static final SimpleParticleType CHARTER_SKULL = registerParticleType("charter_skull", FabricParticleTypes.simple());
     public static final SimpleParticleType CHARTER_HIT = registerParticleType("charter_hit", FabricParticleTypes.simple());
+    public static final SimpleParticleType SMALL_SOUL_FLAME = registerParticleType("small_soul_flame", FabricParticleTypes.simple());
 
     public static void init() {}
 }

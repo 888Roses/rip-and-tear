@@ -1,6 +1,7 @@
 package net.rose.rip_and_tear.client.particle;
 
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.minecraft.client.particle.FlameParticle;
 import net.rose.rip_and_tear.common.init.ModParticleTypes;
 
 public class ModClientSideParticles {
@@ -10,6 +11,9 @@ public class ModClientSideParticles {
         );
         ParticleFactoryRegistry.getInstance().register(
                 ModParticleTypes.CHARTER_HIT, CharterHitParticle.Factory::new
+        );
+        ParticleFactoryRegistry.getInstance().register(
+                ModParticleTypes.SMALL_SOUL_FLAME, FlameParticle.SmallFactory::new
         );
     }
 }
