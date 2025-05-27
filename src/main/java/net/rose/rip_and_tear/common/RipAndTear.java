@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
+import net.rose.rip_and_tear.common.event.debug.DamagePreviewEvent;
 import net.rose.rip_and_tear.common.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
@@ -29,11 +30,7 @@ public class RipAndTear implements ModInitializer {
         ModSoundEvents.init();
         ModParticleTypes.init();
 
-        ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, source, baseDamageTaken, damageTaken, blocked) -> {
-            if (source.getAttacker() != null && source.getAttacker() instanceof PlayerEntity player) {
-                player.sendMessage(Text.literal("Damaged ").append(entity.getName()).formatted(Formatting.YELLOW).append(" for ").append(Text.literal(String.valueOf(damageTaken)).formatted(Formatting.RED)), true);
-            }
-        });
+        DamagePreviewEvent.registerEvent();
 
         UseEntityCallback.EVENT.register((playerEntity, world, hand, entity, entityHitResult) -> {
             if (!(entity instanceof StatueEntity statue)) return ActionResult.PASS;
