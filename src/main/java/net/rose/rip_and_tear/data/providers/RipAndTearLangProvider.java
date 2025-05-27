@@ -21,6 +21,9 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.THROWN_WARPER, "Thrown Warper");
         translationBuilder.add(ModItems.DUSKS_EPITATH_SCULPTURE, "Sculpture of Dusk's Epitath");
 
+        translationBuilder.add(ModItems.RUNE_MOUTHPIECE, "Orange Rune");
+        translationBuilder.add(ModItems.RUNE_BLANK, "Rune");
+
         translationBuilder.add(ModEntities.WARPER, "Thrown Warper");
     }
 }

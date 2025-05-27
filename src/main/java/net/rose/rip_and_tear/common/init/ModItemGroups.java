@@ -11,6 +11,8 @@ public class ModItemGroups {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(itemGroup -> {
             itemGroup.add(ModItems.DUSKS_EPITATH_SCULPTURE);
+            itemGroup.add(ModItems.RUNE_BLANK);
+            itemGroup.add(ModItems.RUNE_MOUTHPIECE);
         });
     }
 }
