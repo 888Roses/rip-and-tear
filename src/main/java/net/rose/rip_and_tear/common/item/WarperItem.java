@@ -51,6 +51,7 @@ public class WarperItem extends Item {
             var thrownWarperItem = new ItemStack(ModItems.THROWN_WARPER);
             thrownWarperItem.set(ModComponents.THROWN_WARPER_UUID, warperProjectileEntity.getUuid());
             user.setStackInHand(hand, thrownWarperItem);
+            user.getItemCooldownManager().set(thrownWarperItem, 30);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
