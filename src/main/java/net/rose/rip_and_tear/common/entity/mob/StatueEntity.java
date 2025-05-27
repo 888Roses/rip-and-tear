@@ -26,15 +26,15 @@ public class StatueEntity extends MobEntity {
     public StatueEntity(EntityType<? extends MobEntity> entityType, World world) {
         super(entityType, world);
         setPersistent();
-        setBodyYaw(MathHelper.nextFloat(world.getRandom(), -90F, 90F));
-        setHeadYaw(MathHelper.nextFloat(world.getRandom(), -90F, 90F));
-        setPitch(MathHelper.nextFloat(world.getRandom(), -90F, 90F));
+        setBodyYaw(MathHelper.nextFloat(world.getRandom(), -10F, 10F));
+        setHeadYaw(MathHelper.nextFloat(world.getRandom(), -10F, 10F));
+        setPitch(MathHelper.nextFloat(world.getRandom(), -10F, 10F));
 
         this.forcedHeadYaw = this.headYaw;
         this.forcedBodyYaw = this.bodyYaw;
         this.forcedPitch = this.getPitch();
-        this.forcedLimbSwingAnimationProgress = MathHelper.nextFloat(world.getRandom(), -1, 1);
-        this.forcedLimbSwingAmplitude = MathHelper.nextFloat(world.getRandom(), -1, 1);
+        this.forcedLimbSwingAnimationProgress = MathHelper.nextFloat(world.getRandom(), -0.1F, 0.1F);
+        this.forcedLimbSwingAmplitude = MathHelper.nextFloat(world.getRandom(), -0.1F, 0.1F);
         this.forcedClientAge = this.age;
     }
 
