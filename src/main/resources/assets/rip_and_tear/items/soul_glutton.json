@@ -1,0 +1,18 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:using_item",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "rip_and_tear:item/soul_glutton_open"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "rip_and_tear:item/soul_glutton_close"
+    },
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "rip_and_tear:item/soul_glutton_close"
+    }
+  }
+}

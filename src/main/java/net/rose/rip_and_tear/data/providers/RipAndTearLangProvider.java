@@ -24,6 +24,7 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.RUNE_MOUTHPIECE, "Orange Rune");
         translationBuilder.add(ModItems.RUNE_BLANK, "Rune");
         translationBuilder.add(ModItems.STATUE, "Statue");
+        translationBuilder.add(ModItems.SOUL_GLUTTON, "Soul Glouton");
 
         translationBuilder.add(ModEntityTypes.WARPER, "Thrown Warper");
     }

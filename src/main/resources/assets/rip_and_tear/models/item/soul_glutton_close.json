@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "rip_and_tear:item/soul_glouton_close"
+  }
+}

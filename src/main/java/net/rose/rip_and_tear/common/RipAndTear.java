@@ -6,6 +6,7 @@
 package net.rose.rip_and_tear.common;
 
 import moriyashiine.strawberrylib.api.SLib;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.rose.rip_and_tear.common.payload.C2S.ReloadStatueForcedStatePayload;
@@ -41,7 +42,8 @@ public class RipAndTear implements ModInitializer {
         PayloadTypeRegistry.playC2S().register(ReloadStatueForcedStatePayload.ID, ReloadStatueForcedStatePayload.CODEC);
 
         // Receivers
-        ServerPlayNetworking.registerGlobalReceiver(ReloadStatueForcedStatePayload.ID, ReloadStatueForcedStatePayloadReceiver::receive);
+        ServerPlayNetworking.registerGlobalReceiver(ReloadStatueForcedStatePayload.ID,
+                ReloadStatueForcedStatePayloadReceiver::receive);
     }
 
     public static Identifier id(String path) {

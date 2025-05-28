@@ -5,7 +5,15 @@ public class ModConfiguration {
     public static final float THROWN_WARPER_RECALL_DAMAGE_RADIUS = 0.5f;
     public static final float WARPER_PROJECTILE_HIT_DAMAGE = 8f;
 
+    public static final int SOUL_GLUTTON_INTERACTION_DISTANCE = 7;
+    public static final int SOUL_GLUTTON_USE_COOLDOWN = 60;
+    public static final int SOUL_STATE_SOUL_INTEGRITY_MAXIMUM = 100;
+    public static final int SOUL_STATE_SOUL_INTEGRITY_REGAIN_COOLDOWN = 20;
+
     // region Look & Feel
+
+    public static final int SOUL_STATE_SOUL_INTEGRITY_BAR_WIDTH = 182;
+    public static final int SOUL_STATE_SOUL_INTEGRITY_BAR_HEIGHT = 5;
 
     public static final float WARPER_HIT_PARTICLES_SPREAD = 0.35f;
     public static final float THROWN_WARPER_RECALL_TRAIL_INTERVAL = 1f;

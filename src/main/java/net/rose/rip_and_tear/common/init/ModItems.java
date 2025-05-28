@@ -4,10 +4,8 @@ import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerBlock
 import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerItem;
 
 import net.minecraft.item.ToolMaterial;
-import net.rose.rip_and_tear.common.item.RuneItem;
-import net.rose.rip_and_tear.common.item.StatueItem;
-import net.rose.rip_and_tear.common.item.ThrownWarperItem;
-import net.rose.rip_and_tear.common.item.WarperItem;
+import net.minecraft.util.Rarity;
+import net.rose.rip_and_tear.common.item.*;
 import net.minecraft.item.Item;
 
 public class ModItems {
@@ -39,6 +37,11 @@ public class ModItems {
     public static final Item STATUE = registerItem(
             "statue", StatueItem::new,
             new Item.Settings().maxCount(16)
+    );
+
+    public static final Item SOUL_GLUTTON = registerItem(
+            "soul_glutton", SoulGluttonItem::new,
+            new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)
     );
 
     public static void init() {

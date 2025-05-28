@@ -42,7 +42,8 @@
   },
   "custom": {
     "cardinal-components": [
-      "rip_and_tear:statue"
+      "rip_and_tear:statue",
+      "rip_and_tear:soul_state"
     ]
   }
 }
