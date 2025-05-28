@@ -35,7 +35,7 @@ public class WarperItem extends Item {
 
         if (world instanceof ServerWorld serverWorld) {
             var warperProjectileEntity = ProjectileEntity.spawn(
-                    new WarperProjectileEntity(ModEntities.WARPER, world), serverWorld, stack,
+                    new WarperProjectileEntity(ModEntityTypes.WARPER, world), serverWorld, stack,
                     projectile -> {
                         projectile.setOwner(user);
                         projectile.setPos(user.getPos().getX(), user.getEyeY(), user.getPos().getZ());

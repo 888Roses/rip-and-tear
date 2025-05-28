@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 
 
-public class ModEntities {
+public class ModEntityTypes {
     public static final EntityType<WarperProjectileEntity> WARPER = registerEntityType(
             "warper",
             EntityType.Builder.create(WarperProjectileEntity::new, SpawnGroup.CREATURE)

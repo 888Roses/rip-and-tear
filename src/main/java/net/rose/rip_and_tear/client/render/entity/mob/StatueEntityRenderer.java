@@ -7,6 +7,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.rose.rip_and_tear.common.RipAndTear;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
+import net.rose.rip_and_tear.common.entity.mob.StatueEntitySkinType;
 import net.rose.rip_and_tear.common.init.ModEntityComponents;
 
 public class StatueEntityRenderer extends BipedEntityRenderer<StatueEntity, StatueEntityRenderState,
@@ -28,7 +29,7 @@ public class StatueEntityRenderer extends BipedEntityRenderer<StatueEntity, Stat
 
     @Override
     public Identifier getTexture(StatueEntityRenderState state) {
-        return state.slim ? SLIM_SKIN : DEFAULT_SKIN;
+        return StatueEntitySkinType.values()[state.textureIndex].getIdentifier();
     }
 
     @Override
@@ -37,6 +38,7 @@ public class StatueEntityRenderer extends BipedEntityRenderer<StatueEntity, Stat
         state.slim = entity.isSlim();
 
         ModEntityComponents.STATUE.maybeGet(entity).ifPresent(x -> {
+            state.textureIndex = x.getTextureIndex();
             state.pose = x.getForcedPose();
             state.relativeHeadYaw = x.getForcedHeadYaw();
             state.bodyYaw = x.getForcedBodyYaw();

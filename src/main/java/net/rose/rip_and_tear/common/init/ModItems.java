@@ -1,9 +1,11 @@
 package net.rose.rip_and_tear.common.init;
 
+import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerBlockItem;
 import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerItem;
 
 import net.minecraft.item.ToolMaterial;
 import net.rose.rip_and_tear.common.item.RuneItem;
+import net.rose.rip_and_tear.common.item.StatueItem;
 import net.rose.rip_and_tear.common.item.ThrownWarperItem;
 import net.rose.rip_and_tear.common.item.WarperItem;
 import net.minecraft.item.Item;
@@ -32,6 +34,11 @@ public class ModItems {
     public static final Item RUNE_MOUTHPIECE = registerItem(
             "orange_rune", RuneItem::new,
             new Item.Settings().maxCount(1)
+    );
+
+    public static final Item STATUE = registerItem(
+            "statue", StatueItem::new,
+            new Item.Settings().maxCount(16)
     );
 
     public static void init() {

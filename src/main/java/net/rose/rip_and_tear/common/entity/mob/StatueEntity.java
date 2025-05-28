@@ -2,16 +2,26 @@ package net.rose.rip_and_tear.common.entity.mob;
 
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.rose.rip_and_tear.client.screen.StatueConfigurationScreen;
 import net.rose.rip_and_tear.common.components.entity.StatueComponent;
 import net.rose.rip_and_tear.common.init.ModEntityComponents;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -66,6 +76,22 @@ public class StatueEntity extends MobEntity {
         dataTracker.set(SLIM, slim);
     }
 
+    // region Player interaction
+
+    @Override
+    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
+        if (!player.isCreative()) return ActionResult.PASS;
+
+        if (player instanceof ClientPlayerEntity) {
+            MinecraftClient.getInstance().setScreen(new StatueConfigurationScreen(this));
+            return ActionResult.SUCCESS;
+        }
+
+        return super.interactMob(player, hand);
+    }
+
+    // endregion
+
     // region Mob Definition
 
     // Not a mob and not a player, since is a statue.
@@ -81,6 +107,22 @@ public class StatueEntity extends MobEntity {
     // Cannot be pushed around.
     public boolean isPushable() {
         return false;
+    }
+
+    // Audio feedback:
+    @Override
+    protected @Nullable SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_ARMOR_STAND_HIT;
+    }
+
+    @Override
+    protected @Nullable SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_ARMOR_STAND_BREAK;
+    }
+
+    @Override
+    public FallSounds getFallSounds() {
+        return new FallSounds(SoundEvents.ENTITY_ARMOR_STAND_FALL, SoundEvents.ENTITY_ARMOR_STAND_FALL);
     }
 
     // endregion

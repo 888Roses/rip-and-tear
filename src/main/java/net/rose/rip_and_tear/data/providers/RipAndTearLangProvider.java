@@ -2,7 +2,7 @@ package net.rose.rip_and_tear.data.providers;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.rose.rip_and_tear.common.init.ModEntities;
+import net.rose.rip_and_tear.common.init.ModEntityTypes;
 import net.rose.rip_and_tear.common.init.ModItems;
 import net.minecraft.registry.RegistryWrapper;
 
@@ -23,7 +23,8 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.RUNE_MOUTHPIECE, "Orange Rune");
         translationBuilder.add(ModItems.RUNE_BLANK, "Rune");
+        translationBuilder.add(ModItems.STATUE, "Statue");
 
-        translationBuilder.add(ModEntities.WARPER, "Thrown Warper");
+        translationBuilder.add(ModEntityTypes.WARPER, "Thrown Warper");
     }
 }
