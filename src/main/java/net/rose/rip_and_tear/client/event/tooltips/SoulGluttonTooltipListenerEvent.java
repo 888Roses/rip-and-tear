@@ -8,6 +8,7 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.rose.rip_and_tear.common.init.ModItems;
+import net.rose.rip_and_tear.common.util.TextUtils;
 
 import java.util.List;
 
@@ -17,11 +18,7 @@ public class SoulGluttonTooltipListenerEvent implements ItemTooltipCallback {
                            List<Text> lines) {
         if (!stack.isOf(ModItems.SOUL_GLUTTON)) return;
 
-        var useKeyText = Text.translatable(MinecraftClient.getInstance().options.useKey.getBoundKeyTranslationKey());
-        var useKeyComponent = Text.literal(useKeyText.getString()).formatted(Formatting.GOLD);
-
-        lines.add(Text.literal("Hold [").formatted(Formatting.DARK_GRAY).append(useKeyComponent).append("] on any " +
-                "entity to absorb their soul. Each time a part of their soul is absorbed and 1 heart is deducted from" +
-                " their maximum health.").formatted(Formatting.DARK_GRAY));
+        var useKeyComponent = TextUtils.getKeyText(MinecraftClient.getInstance().options.useKey);
+        lines.add(Text.translatable("item.rip_and_tear.soul_glutton.desc", useKeyComponent).formatted(Formatting.DARK_GRAY));
     }
 }
