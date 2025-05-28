@@ -11,12 +11,12 @@ import net.minecraft.item.Item;
 public class ModItems {
     public static final Item WARPER = registerItem(
             "warper", WarperItem::new,
-            new Item.Settings().sword(ModToolMaterials.CURSED, 3f, -2f)
+            new Item.Settings().sword(ModToolMaterials.CURSED, 3f, -2f).rarity(Rarity.UNCOMMON)
     );
 
     public static final Item THROWN_WARPER = registerItem(
             "thrown_warper", ThrownWarperItem::new,
-            new Item.Settings().maxCount(1)
+            new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)
     );
 
     public static final Item DUSKS_EPITATH_SCULPTURE = registerItem(
