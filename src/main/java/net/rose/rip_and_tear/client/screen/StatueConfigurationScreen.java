@@ -3,8 +3,6 @@ package net.rose.rip_and_tear.client.screen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.text.Text;
@@ -13,7 +11,7 @@ import net.rose.rip_and_tear.common.components.entity.StatueComponent;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntitySkinType;
 import net.rose.rip_and_tear.common.init.ModEntityComponents;
-import net.rose.rip_and_tear.common.util.Mathf;
+import net.rose.rip_and_tear.common.util.TextUtils;
 
 import java.util.function.Function;
 
@@ -49,6 +47,28 @@ public class StatueConfigurationScreen extends Screen {
             int index,
             String sliderName,
             float minimum, float maximum,
+            Function<StatueComponent, Float> setStartingValue,
+            SliderValueSetter onValueChanged
+    ) {
+        return createSliderWithValue(
+                index, sliderName, minimum, maximum,
+                simpleSliderWidget -> {
+                    // Get the value between the maximum and minimum params.
+                    var effectiveValue = MathHelper.lerp(simpleSliderWidget.getValue(), minimum, maximum);
+                    // Round it to have a floating number with a 1 decimal accuracy.
+                    var roundedEffectiveValue = roundValue((float) effectiveValue);
+                    // Display it as the message of the slider.
+                    return Text.literal(sliderName + ": " + roundedEffectiveValue);
+                },
+                setStartingValue, onValueChanged
+        );
+    }
+
+    private SimpleSliderWidget createSliderWithValue(
+            int index,
+            String sliderName,
+            float minimum, float maximum,
+            Function<SimpleSliderWidget, Text> updateMessage,
             Function<StatueComponent, Float> setStartingValue,
             SliderValueSetter onValueChanged
     ) {
@@ -88,13 +108,8 @@ public class StatueConfigurationScreen extends Screen {
                     });
                 })
 
-                .updateMessage(simpleSliderWidget -> {
-                    // Get the value between the maximum and minimum params.
-                    var effectiveValue = MathHelper.lerp(simpleSliderWidget.getValue(), minimum, maximum);
-                    // Round it to have a floating number with a 1 decimal accuracy.
-                    var roundedEffectiveValue = roundValue((float) effectiveValue);
-                    // Display it as the message of the slider.
-                    simpleSliderWidget.setMessage(Text.literal(sliderName + ": " + roundedEffectiveValue));
+                .updateMessage(widget -> {
+                    widget.setMessage(updateMessage.apply(widget));
                 })
 
                 .build();
@@ -110,18 +125,32 @@ public class StatueConfigurationScreen extends Screen {
 
         addDrawableChild(createSliderWithValue(
                 -4, "Entity Pose", 0, EntityPose.values().length - 1,
+                widget -> {
+                    final var max = EntityPose.values().length - 1;
+                    var effectiveValue = MathHelper.lerp(widget.getValue(), 0, max);
+                    var roundedEffectiveValue = roundValue((float) effectiveValue);
+                    var roundedIndex = (int) Math.clamp(roundedEffectiveValue, 0, max);
+                    return TextUtils.toLiteral(TextUtils.prettify(EntityPose.values()[roundedIndex].name()));
+                },
                 component -> (float) component.getForcedPose().getIndex(),
                 (component, forcedPose) -> {
-                    var roundedIndex = (int)Math.clamp(forcedPose, 0, EntityPose.values().length - 1);
+                    var roundedIndex = (int) Math.clamp(forcedPose, 0, EntityPose.values().length - 1);
                     var pose = EntityPose.INDEX_TO_VALUE.apply(roundedIndex);
                     component.setForcedPose(pose);
                 }
         ));
         addDrawableChild(createSliderWithValue(
                 -3, "Skin Type", 0, StatueEntitySkinType.values().length - 1,
+                widget -> {
+                    final var max = StatueEntitySkinType.values().length - 1;
+                    var effectiveValue = MathHelper.lerp(widget.getValue(), 0, max);
+                    var roundedEffectiveValue = roundValue((float) effectiveValue);
+                    var roundedIndex = (int) Math.clamp(roundedEffectiveValue, 0, max);
+                    return StatueEntitySkinType.values()[roundedIndex].getName();
+                },
                 component -> (float) component.getTextureIndex(),
                 (component, skin) -> {
-                    var roundedIndex = (int)Math.clamp(skin, 0, StatueEntitySkinType.values().length - 1);
+                    var roundedIndex = (int) Math.clamp(skin, 0, StatueEntitySkinType.values().length - 1);
                     component.setTextureIndex(roundedIndex);
                 }
         ));
