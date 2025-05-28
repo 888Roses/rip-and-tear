@@ -55,6 +55,7 @@ public class StatueConfigurationScreen extends Screen {
         final int WIDTH = 100;
         final int HEIGHT = 20;
         final int GAP = 4;
+        final int HORIZONTAL_OFFSET = width / 4;
 
         final int screenCenterX = width / 2;
         final int screenCenterY = height / 2;
@@ -63,7 +64,7 @@ public class StatueConfigurationScreen extends Screen {
         return SimpleSliderWidget.builder(Text.literal(sliderName))
                 .size(WIDTH, HEIGHT)
                 // Remember: vertically, + makes it go down and - makes it go up.
-                .position(screenCenterX - WIDTH / 2, screenCenterY - HEIGHT / 2 + offset)
+                .position(screenCenterX - WIDTH / 2 - HORIZONTAL_OFFSET, screenCenterY - HEIGHT / 2 + offset)
 
                 .startingValue(() -> {
                     var initialValue = setStartingValue.apply(getStatueComponent());
