@@ -1,6 +1,9 @@
 package net.rose.rip_and_tear.common.util;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 public class TextUtils {
     public static String prettify(String text) {
@@ -22,5 +25,10 @@ public class TextUtils {
 
     public static Text toLiteral(String text) {
         return Text.literal(text);
+    }
+
+    public static Text getKeyText(KeyBinding binding) {
+        var useKeyText = Text.translatable(binding.getBoundKeyTranslationKey());
+        return Text.literal(useKeyText.getString()).formatted(Formatting.GOLD);
     }
 }

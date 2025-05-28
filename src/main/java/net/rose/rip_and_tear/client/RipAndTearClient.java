@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.rose.rip_and_tear.client.event.overlays.SoulIntegrityOverlayEvent;
 import net.rose.rip_and_tear.client.event.tooltips.SoulGluttonTooltipListenerEvent;
+import net.rose.rip_and_tear.client.event.tooltips.StatueTooltipListenerEvent;
 import net.rose.rip_and_tear.client.render.block.EngravedDeepslateBlockEntityRenderer;
 import net.rose.rip_and_tear.client.render.entity.WarperProjectileEntityRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -35,5 +36,6 @@ public class RipAndTearClient implements ClientModInitializer {
 
         HudLayerRegistrationCallback.EVENT.register(new SoulIntegrityOverlayEvent());
         ItemTooltipCallback.EVENT.register(new SoulGluttonTooltipListenerEvent());
+        ItemTooltipCallback.EVENT.register(new StatueTooltipListenerEvent());
     }
 }
