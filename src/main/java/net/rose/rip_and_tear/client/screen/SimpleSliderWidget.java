@@ -1,7 +1,13 @@
 package net.rose.rip_and_tear.client.screen;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.SliderWidget;
+import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.MathHelper;
+import net.rose.rip_and_tear.common.util.SoundUtil;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -32,9 +38,19 @@ public class SimpleSliderWidget extends SliderWidget {
         updateMessage.accept(this);
     }
 
+    private double lastValue;
+
     @Override
     protected void applyValue() {
         onValueChanged.accept(this.value);
+
+        var dst = Math.abs(this.value - lastValue);
+        if (dst > 0.05) {
+            // We're on the client anyway
+            var client = MinecraftClient.getInstance();
+            client.world.playSoundClient(SoundEvents.BLOCK_NOTE_BLOCK_HAT.value(), SoundCategory.MASTER, 1, MathHelper.lerp((float)this.value, 0.5F, 2F));
+            lastValue = this.value;
+        }
     }
 
     public double getValue() {

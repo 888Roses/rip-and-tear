@@ -1,14 +1,19 @@
 package net.rose.rip_and_tear.client.screen;
 
+import com.google.common.collect.ImmutableMultimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
+import net.rose.rip_and_tear.common.RipAndTear;
 import net.rose.rip_and_tear.common.components.entity.StatueComponent;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntitySkinType;
@@ -179,16 +184,45 @@ public class StatueConfigurationScreen extends Screen {
                 StatueComponent::getForcedLimbSwingAmplitude,
                 StatueComponent::setForcedLimbSwingAmplitude
         ));
-            addDrawableChild(createSliderWithValue(
-                    3, "Can Hold Items", 0, 1,
-                    widget -> TextUtils.toLiteral(widget.getValue() < 0.5F ? "False" : "True"),
-                    component -> component.getLivingEntity().canPickUpLoot() ? 1F : 0F,
-                    (component, value) -> {
-                        if (component.getLivingEntity() instanceof MobEntity mobEntity) {
-                            mobEntity.setCanPickUpLoot(value >= 0.5F);
-                            ClientPlayNetworking.send(SetMobPickUpLootPayload.fromMobEntity(mobEntity));
-                        }
+        addDrawableChild(createSliderWithValue(
+                3, "Can Hold Items", 0, 1,
+                widget -> TextUtils.toLiteral("Can Hold Items: " + (widget.getValue() < 0.5F ? "False" : "True")),
+                component -> component.getLivingEntity().canPickUpLoot() ? 1F : 0F,
+                (component, value) -> {
+                    if (component.getLivingEntity() instanceof MobEntity mobEntity) {
+                        mobEntity.setCanPickUpLoot(value >= 0.5F);
+                        ClientPlayNetworking.send(SetMobPickUpLootPayload.fromMobEntity(mobEntity));
                     }
-            ));
+                }
+        ));
+        addDrawableChild(createSliderWithValue(
+                4, "Size", 0f, 3f,
+                widget -> TextUtils.toLiteral("Size: " + (MathHelper.lerp((float) widget.getValue(), 0, 3F) >= 0 ? "+" : "") + roundValue(MathHelper.lerp((float) widget.getValue(), 0, 3F))),
+                component -> {
+                    var attributes = component.getLivingEntity().getAttributes();
+                    if (attributes.hasModifierForAttribute(EntityAttributes.SCALE, RipAndTear.id("statue_scale"))) {
+                        return (float) attributes.getModifierValue(
+                                EntityAttributes.SCALE, RipAndTear.id("statue_scale")
+                        ) / 3f;
+                    }
+
+                    return 0f;
+                },
+                (component, value) -> {
+                    var attributes = component.getLivingEntity().getAttributes();
+                    if (attributes.hasModifierForAttribute(
+                            EntityAttributes.SCALE,
+                            RipAndTear.id("statue_scale")
+                    )) {
+                        attributes.addTemporaryModifiers(
+                                ImmutableMultimap.<RegistryEntry<EntityAttribute>, EntityAttributeModifier>builder()
+                                        .put(EntityAttributes.SCALE,
+                                                new EntityAttributeModifier(RipAndTear.id("statue_scale"),
+                                                        value, EntityAttributeModifier.Operation.ADD_VALUE))
+                                        .build()
+                        );
+                    }
+                }
+        ));
     }
 }

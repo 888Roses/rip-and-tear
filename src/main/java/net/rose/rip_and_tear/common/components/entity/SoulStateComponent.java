@@ -73,9 +73,6 @@ public class SoulStateComponent implements AutoSyncedComponent,
         if (livingEntity == null) return;
 
         var modifiers = getAttributeMap();
-        if (livingEntity.getAttributes().hasModifierForAttribute(EntityAttributes.MAX_HEALTH, MODIFIER_ID))
-            livingEntity.getAttributes().removeModifiers(modifiers);
-
         livingEntity.getAttributes().addTemporaryModifiers(modifiers);
     }
 
