@@ -53,6 +53,10 @@ public class StatueComponent implements AutoSyncedComponent {
         ModEntityComponents.STATUE.sync(livingEntity);
     }
 
+    public LivingEntity getLivingEntity() {
+        return livingEntity;
+    }
+
     public int getTextureIndex() {
         return textureIndex;
     }

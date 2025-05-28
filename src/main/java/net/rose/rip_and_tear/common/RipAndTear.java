@@ -14,7 +14,9 @@ import net.rose.rip_and_tear.common.event.debug.DamagePreviewEvent;
 import net.rose.rip_and_tear.common.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
+import net.rose.rip_and_tear.common.payload.C2S.SetMobPickUpLootPayload;
 import net.rose.rip_and_tear.common.receiver.global.ReloadStatueForcedStatePayloadReceiver;
+import net.rose.rip_and_tear.common.receiver.global.SetMobPickUpLootPayloadReceiver;
 
 public class RipAndTear implements ModInitializer {
     public static final String MOD_ID = "rip_and_tear";
@@ -40,10 +42,13 @@ public class RipAndTear implements ModInitializer {
 
     public static void initNetworking() {
         PayloadTypeRegistry.playC2S().register(ReloadStatueForcedStatePayload.ID, ReloadStatueForcedStatePayload.CODEC);
+        PayloadTypeRegistry.playC2S().register(SetMobPickUpLootPayload.ID, SetMobPickUpLootPayload.CODEC);
 
         // Receivers
         ServerPlayNetworking.registerGlobalReceiver(ReloadStatueForcedStatePayload.ID,
                 ReloadStatueForcedStatePayloadReceiver::receive);
+        ServerPlayNetworking.registerGlobalReceiver(SetMobPickUpLootPayload.ID,
+                SetMobPickUpLootPayloadReceiver::receive);
     }
 
     public static Identifier id(String path) {

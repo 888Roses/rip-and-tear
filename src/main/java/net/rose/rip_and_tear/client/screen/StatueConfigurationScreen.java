@@ -6,12 +6,14 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import net.rose.rip_and_tear.common.components.entity.StatueComponent;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntitySkinType;
 import net.rose.rip_and_tear.common.init.ModEntityComponents;
+import net.rose.rip_and_tear.common.payload.C2S.SetMobPickUpLootPayload;
 import net.rose.rip_and_tear.common.util.TextUtils;
 
 import java.util.function.Function;
@@ -177,5 +179,16 @@ public class StatueConfigurationScreen extends Screen {
                 StatueComponent::getForcedLimbSwingAmplitude,
                 StatueComponent::setForcedLimbSwingAmplitude
         ));
+            addDrawableChild(createSliderWithValue(
+                    3, "Can Hold Items", 0, 1,
+                    widget -> TextUtils.toLiteral(widget.getValue() < 0.5F ? "False" : "True"),
+                    component -> component.getLivingEntity().canPickUpLoot() ? 1F : 0F,
+                    (component, value) -> {
+                        if (component.getLivingEntity() instanceof MobEntity mobEntity) {
+                            mobEntity.setCanPickUpLoot(value >= 0.5F);
+                            ClientPlayNetworking.send(SetMobPickUpLootPayload.fromMobEntity(mobEntity));
+                        }
+                    }
+            ));
     }
 }
