@@ -25,9 +25,12 @@ public class SoulIntegrityOverlayEvent implements HudLayerRegistrationCallback {
                 IdentifiedLayer.HOTBAR_AND_BARS, RipAndTear.id("dead_hearts"),
                 (context, tickCounter) -> {
                     // Render hearts.
-                    ModEntityComponents.SOUL_STATE.maybeGet(MinecraftClient.getInstance().player).ifPresent(component -> {
-                        for (var i = 0; i < component.getDeadHeartCount(); i++) renderHeart(context, i);
-                    });
+                    assert MinecraftClient.getInstance().player != null;
+                    if (!MinecraftClient.getInstance().player.isCreative()) {
+                        ModEntityComponents.SOUL_STATE.maybeGet(MinecraftClient.getInstance().player).ifPresent(component -> {
+                            for (var i = 0; i < component.getDeadHeartCount(); i++) renderHeart(context, i);
+                        });
+                    }
 
                     // Render soul integrity bar.
                     if (SoulGluttonItem.clientLastTarget != null) {
