@@ -173,7 +173,7 @@ public class StatueEntity extends MobEntity {
     @Override
     protected void dropLoot(ServerWorld world, DamageSource damageSource, boolean causedByPlayer) {
         super.dropLoot(world, damageSource, causedByPlayer);
-        var pos = damageSource.getPosition();
+        var pos = this.getPos();
         var itemEntity = new ItemEntity(world, pos.x, pos.y, pos.z, new ItemStack(ModItems.STATUE));
         world.spawnEntity(itemEntity);
     }
