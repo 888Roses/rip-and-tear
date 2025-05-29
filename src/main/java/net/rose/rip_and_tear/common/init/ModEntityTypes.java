@@ -2,6 +2,7 @@ package net.rose.rip_and_tear.common.init;
 
 import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerEntityType;
 
+import net.rose.rip_and_tear.common.entity.effect.FateCrusherEntity;
 import net.rose.rip_and_tear.common.entity.projectile.WarperProjectileEntity;
 import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
 import net.minecraft.entity.EntityType;
@@ -24,6 +25,14 @@ public class ModEntityTypes {
                     .eyeHeight(1.7775F)
                     .maxTrackingRange(10),
             StatueEntity.createMobAttributes()
+    );
+
+    public static final EntityType<FateCrusherEntity> FATE_CRUSHER = registerEntityType(
+            "fate_crusher",
+            EntityType.Builder.create(FateCrusherEntity::new, SpawnGroup.MISC)
+                    .dimensions(1,2)
+                    .eyeHeight(2)
+                    .makeFireImmune()
     );
 
     public static void init() {

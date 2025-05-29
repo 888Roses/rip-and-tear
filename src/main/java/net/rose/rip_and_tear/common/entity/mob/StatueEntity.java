@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -14,7 +15,9 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -27,6 +30,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
+import net.rose.rip_and_tear.common.init.ModItems;
 import net.rose.rip_and_tear.common.util.SoundUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -102,7 +106,7 @@ public class StatueEntity extends MobEntity {
         if (!player.isSneaking()) {
             var stackInHand = player.getStackInHand(hand);
             var currentStackInHand = this.getStackInHand(hand);
-            if (!stackInHand.isEmpty()||!currentStackInHand.isEmpty()) {
+            if (!stackInHand.isEmpty() || !currentStackInHand.isEmpty()) {
                 if (this.canPickUpLoot()) {
                     this.setStackInHand(hand, stackInHand);
                     player.setStackInHand(hand, currentStackInHand);
@@ -164,4 +168,18 @@ public class StatueEntity extends MobEntity {
     }
 
     // endregion
+
+
+    @Override
+    protected void dropLoot(ServerWorld world, DamageSource damageSource, boolean causedByPlayer) {
+        super.dropLoot(world, damageSource, causedByPlayer);
+        var pos = damageSource.getPosition();
+        var itemEntity = new ItemEntity(world, pos.x, pos.y, pos.z, new ItemStack(ModItems.STATUE));
+        world.spawnEntity(itemEntity);
+    }
+
+    @Override
+    public @Nullable ItemStack getPickBlockStack() {
+        return new ItemStack(ModItems.STATUE);
+    }
 }

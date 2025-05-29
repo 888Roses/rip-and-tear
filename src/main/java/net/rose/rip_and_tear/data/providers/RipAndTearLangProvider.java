@@ -25,7 +25,7 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.RUNE_BLANK, "Rune");
 
         translationBuilder.add(ModItems.STATUE, "Statue");
-        translationBuilder.add("item.rip_and_tear.statue.desc", "Represents a player statue with customizable pose. Use [%s] on a statue to customize limb positions as well as the statue's appearance.");
+        translationBuilder.add("item.rip_and_tear.statue.desc", "Represents a player statue with customizable pose. [%s] + [%s] on a statue to customize limb positions as well as the statue's appearance.");
 
         translationBuilder.add(ModItems.SOUL_GLUTTON, "Soul Glutton");
         translationBuilder.add("item.rip_and_tear.soul_glutton.desc", "Hold [%s] on any entity to absorb their soul. Each time a part of their soul is absorbed and 1 heart is deducted from their maximum health.");

@@ -11,6 +11,8 @@ import net.rose.rip_and_tear.client.render.block.EngravedDeepslateBlockEntityRen
 import net.rose.rip_and_tear.client.render.entity.WarperProjectileEntityRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.rose.rip_and_tear.client.particle.ModClientSideParticles;
+import net.rose.rip_and_tear.client.render.entity.effect.FateCrusherEntityModel;
+import net.rose.rip_and_tear.client.render.entity.effect.FateCrusherEntityRenderer;
 import net.rose.rip_and_tear.client.render.entity.mob.StatueEntityModel;
 import net.rose.rip_and_tear.client.render.entity.mob.StatueEntityRenderer;
 import net.rose.rip_and_tear.common.init.ModBlockEntityTypes;
@@ -23,9 +25,11 @@ public class RipAndTearClient implements ClientModInitializer {
     public void onInitializeClient() {
         EntityModelLayerRegistry.registerModelLayer(StatueEntityModel.LAYER, () -> StatueEntityModel.getTexturedModelData(false));
         EntityModelLayerRegistry.registerModelLayer(StatueEntityModel.LAYER_SLIM, () -> StatueEntityModel.getTexturedModelData(true));
+        EntityModelLayerRegistry.registerModelLayer(FateCrusherEntityModel.MAIN, FateCrusherEntityModel::getTexturedModelData);
 
         EntityRendererRegistry.register(ModEntityTypes.WARPER, WarperProjectileEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.STATUE, StatueEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.FATE_CRUSHER, FateCrusherEntityRenderer::new);
 
         BlockEntityRendererFactories.register(
                 ModBlockEntityTypes.ENGRAVED_DEEPSLATE,

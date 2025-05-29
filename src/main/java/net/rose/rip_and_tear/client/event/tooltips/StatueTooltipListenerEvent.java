@@ -19,6 +19,7 @@ public class StatueTooltipListenerEvent implements ItemTooltipCallback {
         if (!stack.isOf(ModItems.STATUE)) return;
 
         var useKeyComponent = TextUtils.getKeyText(MinecraftClient.getInstance().options.useKey);
-        lines.add(Text.translatable("item.rip_and_tear.statue.desc", useKeyComponent).formatted(Formatting.DARK_GRAY));
+        var crouchKeyComponent = TextUtils.getKeyText(MinecraftClient.getInstance().options.sneakKey);
+        lines.add(Text.translatable("item.rip_and_tear.statue.desc", crouchKeyComponent, useKeyComponent).formatted(Formatting.DARK_GRAY));
     }
 }

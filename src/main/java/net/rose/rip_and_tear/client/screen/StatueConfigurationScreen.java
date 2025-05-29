@@ -1,27 +1,26 @@
 package net.rose.rip_and_tear.client.screen;
 
-import com.google.common.collect.ImmutableMultimap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
-import net.rose.rip_and_tear.common.RipAndTear;
-import net.rose.rip_and_tear.common.components.entity.StatueComponent;
-import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
-import net.rose.rip_and_tear.common.entity.mob.StatueEntitySkinType;
-import net.rose.rip_and_tear.common.init.ModEntityComponents;
 import net.rose.rip_and_tear.common.payload.C2S.SetMobPickUpLootPayload;
+import net.rose.rip_and_tear.common.components.entity.StatueComponent;
+import net.rose.rip_and_tear.common.entity.mob.StatueEntitySkinType;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.rose.rip_and_tear.common.init.ModEntityComponents;
+import net.rose.rip_and_tear.common.entity.mob.StatueEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.attribute.EntityAttribute;
+import com.google.common.collect.ImmutableMultimap;
 import net.rose.rip_and_tear.common.util.TextUtils;
-
+import net.minecraft.registry.entry.RegistryEntry;
+import net.rose.rip_and_tear.common.RipAndTear;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.EntityPose;
+import net.fabricmc.api.Environment;
 import java.util.function.Function;
+import net.fabricmc.api.EnvType;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class StatueConfigurationScreen extends Screen {
@@ -38,12 +37,8 @@ public class StatueConfigurationScreen extends Screen {
         return Math.round(value * 10) / 10F;
     }
 
-    private float valueAsRotation(double value) {
-        return roundValue((float) value * 360F);
-    }
-
     @FunctionalInterface
-    private static interface SliderValueSetter {
+    private interface SliderValueSetter {
         void set(StatueComponent component, float value);
     }
 
@@ -116,10 +111,7 @@ public class StatueConfigurationScreen extends Screen {
                     });
                 })
 
-                .updateMessage(widget -> {
-                    widget.setMessage(updateMessage.apply(widget));
-                })
-
+                .updateMessage(widget -> widget.setMessage(updateMessage.apply(widget)))
                 .build();
     }
 
@@ -167,12 +159,12 @@ public class StatueConfigurationScreen extends Screen {
                 StatueComponent::getForcedHeadYaw, StatueComponent::setForcedHeadYaw
         ));
         addDrawableChild(createSliderWithValue(
-                -1, "Body Yaw", 0, 360F,
-                StatueComponent::getForcedBodyYaw, StatueComponent::setForcedBodyYaw
+                -1, "Pitch", -180F, 180F,
+                StatueComponent::getForcedPitch, StatueComponent::setForcedPitch
         ));
         addDrawableChild(createSliderWithValue(
-                0, "Pitch", -180F, 180F,
-                StatueComponent::getForcedPitch, StatueComponent::setForcedPitch
+                0, "Body Yaw", 0, 360F,
+                StatueComponent::getForcedBodyYaw, StatueComponent::setForcedBodyYaw
         ));
         addDrawableChild(createSliderWithValue(
                 1, "Limb Animation", 0, 1,
@@ -214,6 +206,7 @@ public class StatueConfigurationScreen extends Screen {
                             EntityAttributes.SCALE,
                             RipAndTear.id("statue_scale")
                     )) {
+                        // TODO: Payload sync c2s
                         attributes.addTemporaryModifiers(
                                 ImmutableMultimap.<RegistryEntry<EntityAttribute>, EntityAttributeModifier>builder()
                                         .put(EntityAttributes.SCALE,

@@ -44,6 +44,11 @@ public class ModItems {
             new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)
     );
 
+    public static final Item FATE_CRUSHER = registerItem(
+            "fate_crusher", FateCrusherItem::new,
+            new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)
+    );
+
     public static void init() {
     }
 }
