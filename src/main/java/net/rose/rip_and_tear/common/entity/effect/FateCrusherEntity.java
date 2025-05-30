@@ -1,56 +1,88 @@
 package net.rose.rip_and_tear.common.entity.effect;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import static net.rose.rip_and_tear.common.init.ModConfiguration.*;
+
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.Box;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class FateCrusherEntity extends Entity {
-    public static final int FATE_CRUSHER_LIFETIME = 8;
     public LivingEntity owner;
     public Vec3d pos;
+
+    public LivingEntity getOwner() {
+        return owner;
+    }
+
+    @Override
+    public Vec3d getPos() {
+        return pos;
+    }
 
     public FateCrusherEntity(EntityType<? extends Entity> entityType, World world) {
         super(entityType, world);
     }
 
+    private boolean isTarget(Entity entity) {
+        return entity instanceof LivingEntity;
+    }
+
+    private DamageSource getDamageSource(ServerWorld serverWorld, Entity owner) {
+        return owner instanceof PlayerEntity player
+                ? serverWorld.getDamageSources().playerAttack(player)
+                : serverWorld.getDamageSources().magic();
+    }
+
     @Override
     public void tick() {
         super.tick();
-        if (this.age > 4 && getWorld() instanceof ServerWorld serverWorld) {
-            for (var e : getWorld().getOtherEntities(this.owner, Box.from(pos).expand(3F), e1 -> e1 instanceof LivingEntity)) {
-                e.damage(serverWorld, serverWorld.getDamageSources().magic(), 20);
-                e.timeUntilRegen = 0;
-            }
+
+        // Kill if too old.
+        if (this.age > FATE_CRUSHER_ENTITY_LIFETIME) {
+            discard();
+            return;
         }
 
-        if (this.age > FATE_CRUSHER_LIFETIME) discard();
+        var world = getWorld();
+        var owner = getOwner();
+        if (owner == null) return;
+
+        // Check if the animation matches with dealing damage + if we're on server side.
+        if (this.age <= FATE_CRUSHER_ENTITY_DAMAGE_START_AGE || !(world instanceof ServerWorld serverWorld)) return;
+
+        var detectionBox = Box.from(getPos()).expand(FATE_CRUSHER_ENTITY_AOD_BOX_SIZE);
+        // For each target in the detection range that isn't this weapon's owner.
+        for (var target : serverWorld.getOtherEntities(owner, detectionBox, this::isTarget)) {
+            // Deal damage.
+            target.damage(serverWorld, getDamageSource(serverWorld, owner), FATE_CRUSHER_ENTITY_DAMAGE_PER_TICK);
+            // Reset the iframe time.
+            target.timeUntilRegen = 0;
+        }
     }
 
-    @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-    }
-
+    // We don't want to be able to damage the entity.
     @Override
     public boolean damage(ServerWorld world, DamageSource source, float amount) {
         return false;
     }
 
+    // Nothing to save or load.
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
+    protected void initDataTracker(DataTracker.Builder builder) {}
 
-    }
-
+    // Nothing to save or load.
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
+    protected void readCustomDataFromNbt(NbtCompound nbt) {}
 
-    }
+    // Nothing to save or load.
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound nbt) {}
 }

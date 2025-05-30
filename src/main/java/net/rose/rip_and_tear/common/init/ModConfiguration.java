@@ -1,14 +1,22 @@
 package net.rose.rip_and_tear.common.init;
 
 public class ModConfiguration {
+    // Warper
     public static final float THROWN_WARPER_RECALL_DAMAGE = 8f;
     public static final float THROWN_WARPER_RECALL_DAMAGE_RADIUS = 0.5f;
     public static final float WARPER_PROJECTILE_HIT_DAMAGE = 8f;
 
+    // Soul Glutton
     public static final int SOUL_GLUTTON_INTERACTION_DISTANCE = 7;
     public static final int SOUL_GLUTTON_USE_COOLDOWN = 60;
     public static final int SOUL_STATE_SOUL_INTEGRITY_MAXIMUM = 100;
     public static final int SOUL_STATE_SOUL_INTEGRITY_REGAIN_COOLDOWN = 20;
+
+    // Fate Crusher
+    public static final int FATE_CRUSHER_ENTITY_LIFETIME = 8;
+    public static final int FATE_CRUSHER_ENTITY_DAMAGE_START_AGE = 4;
+    public static final float FATE_CRUSHER_ENTITY_DAMAGE_PER_TICK = 5F;
+    public static final float FATE_CRUSHER_ENTITY_AOD_BOX_SIZE = 2F;
 
     // region Look & Feel
 
