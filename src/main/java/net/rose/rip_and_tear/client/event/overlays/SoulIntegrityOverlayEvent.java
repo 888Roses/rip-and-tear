@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
 
 import static net.rose.rip_and_tear.common.init.ModConfiguration.*;
 
+import net.minecraft.world.GameMode;
 import net.rose.rip_and_tear.common.init.ModEntityComponents;
 import net.rose.rip_and_tear.common.item.SoulGluttonItem;
 import net.rose.rip_and_tear.common.RipAndTear;
@@ -25,8 +26,9 @@ public class SoulIntegrityOverlayEvent implements HudLayerRegistrationCallback {
                 IdentifiedLayer.HOTBAR_AND_BARS, RipAndTear.id("dead_hearts"),
                 (context, tickCounter) -> {
                     // Render hearts.
-                    assert MinecraftClient.getInstance().player != null;
-                    if (!MinecraftClient.getInstance().player.isCreative()) {
+                    var player = MinecraftClient.getInstance().player;
+                    assert player != null;
+                    if (player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE) {
                         ModEntityComponents.SOUL_STATE.maybeGet(MinecraftClient.getInstance().player).ifPresent(component -> {
                             for (var i = 0; i < component.getDeadHeartCount(); i++) renderHeart(context, i);
                         });
