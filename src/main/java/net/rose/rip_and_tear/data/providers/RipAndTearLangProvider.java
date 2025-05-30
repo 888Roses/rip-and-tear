@@ -19,23 +19,28 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
                                      TranslationBuilder translationBuilder) {
         translationBuilder.add(ModItems.WARPER, "Warper");
         translationBuilder.add(ModItems.THROWN_WARPER, "Thrown Warper");
+
         translationBuilder.add(ModItems.DUSKS_EPITATH_SCULPTURE, "Sculpture of Dusk's Epitath");
 
-        translationBuilder.add(ModItems.RUNE_MOUTHPIECE, "Orange Rune");
+        translationBuilder.add(ModItems.ORANGE_RUNE, "Orange Rune");
+        translationBuilder.add("item.rip_and_tear.orange_rune.desc", "Pressing [%s] on a deepslate block engraves " +
+                "orange runes in it.");
+
         translationBuilder.add(ModItems.RUNE_BLANK, "Rune");
 
         translationBuilder.add(ModItems.STATUE, "Statue");
         translationBuilder.add("item.rip_and_tear.statue.desc", "Represents a player statue with customizable pose. " +
-                "[%s] + [%s] on a statue to customize limb positions as well as the statue's appearance.");
+                "Holding [%s] and pressing [%s] on a statue allows you to customize limb position and appearance of " +
+                "the statue.");
 
         translationBuilder.add(ModItems.SOUL_GLUTTON, "Soul Glutton");
-        translationBuilder.add("item.rip_and_tear.soul_glutton.desc", "Hold [%s] on any entity to absorb their soul. " +
-                "Each time a part of their soul is absorbed and 1 heart is deducted from their maximum health.");
+        translationBuilder.add("item.rip_and_tear.soul_glutton.desc", "Holding [%s] on an entity absorbs their soul. " +
+                "Absorbing the soul of an entity reduces their max health by 1 heart.");
 
         translationBuilder.add(ModEntityTypes.WARPER, "Thrown Warper");
         translationBuilder.add(ModItems.FATE_CRUSHER, "Fate Crusher");
-        translationBuilder.add("item.rip_and_tear.fate_crusher.desc", "Use [%s] to slam the looked position. Any " +
-                "entity in a %s block radius will be dealt %s AOE damage every tick for %s ticks. Bypasses the " +
+        translationBuilder.add("item.rip_and_tear.fate_crusher.desc", "Pressing [%s] slams the looked at position. " +
+                "Any entity in a %s block radius will be dealt %s AOE damage every tick for %s ticks. Bypasses the " +
                 "invincibility frame.");
     }
 }

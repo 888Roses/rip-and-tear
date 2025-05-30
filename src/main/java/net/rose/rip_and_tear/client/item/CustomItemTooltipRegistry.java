@@ -30,5 +30,12 @@ public class CustomItemTooltipRegistry extends AbstractCustomItemTooltipRegistry
             }
     );
 
+    public static final TooltipInfo ORANGE_RUNE = of(
+            ModItems.ORANGE_RUNE, "item.rip_and_tear.orange_rune.desc",
+            () -> new Object[]{
+                    TextUtils.getKeyText(MinecraftClient.getInstance().options.useKey),
+            }
+    );
+
     public static void init(){}
 }
