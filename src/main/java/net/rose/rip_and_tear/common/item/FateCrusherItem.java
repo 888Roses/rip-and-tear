@@ -9,7 +9,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
-import net.rose.rip_and_tear.common.init.ModConfiguration;
 import net.rose.rip_and_tear.common.init.ModEntityTypes;
 import net.rose.rip_and_tear.common.init.ModSoundEvents;
 import net.rose.rip_and_tear.common.util.Mathf;
@@ -35,7 +34,7 @@ public class FateCrusherItem extends Item {
                 hammerEntity.setBodyYaw(user.getBodyYaw());
 
                 hammerEntity.owner = user;
-                hammerEntity.pos = result.getPos();
+                hammerEntity.slamPosition = result.getPos();
 
                 world.spawnEntity(hammerEntity);
 

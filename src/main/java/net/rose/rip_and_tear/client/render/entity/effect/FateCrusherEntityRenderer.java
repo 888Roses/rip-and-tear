@@ -28,7 +28,6 @@ public class FateCrusherEntityRenderer extends EntityRenderer<FateCrusherEntity,
     public void updateRenderState(FateCrusherEntity entity, FateCrusherEntityRenderState state, float tickProgress) {
         super.updateRenderState(entity, state, tickProgress);
         state.yaw = entity.getYaw();
-
     }
 
     @Override
