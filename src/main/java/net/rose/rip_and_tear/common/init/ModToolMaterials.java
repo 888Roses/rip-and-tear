@@ -7,7 +7,7 @@ import net.minecraft.item.ToolMaterial;
 public class ModToolMaterials {
     public static final ToolMaterial CURSED = new ToolMaterial(
             BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
-            4000, 9F, 2F, 14,
+            4000, 9F, 0F, 14,
             ItemTags.NETHERITE_TOOL_MATERIALS
     );
 

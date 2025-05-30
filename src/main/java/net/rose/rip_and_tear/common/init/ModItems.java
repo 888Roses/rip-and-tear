@@ -1,6 +1,5 @@
 package net.rose.rip_and_tear.common.init;
 
-import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerBlockItem;
 import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerItem;
 
 import net.minecraft.item.ToolMaterial;
@@ -11,7 +10,7 @@ import net.minecraft.item.Item;
 public class ModItems {
     public static final Item WARPER = registerItem(
             "warper", WarperItem::new,
-            new Item.Settings().sword(ModToolMaterials.CURSED, 3f, -2f).rarity(Rarity.UNCOMMON)
+            new Item.Settings().sword(ModToolMaterials.CURSED, 5f, -2f).rarity(Rarity.UNCOMMON)
     );
 
     public static final Item THROWN_WARPER = registerItem(
@@ -46,7 +45,7 @@ public class ModItems {
 
     public static final Item FATE_CRUSHER = registerItem(
             "fate_crusher", FateCrusherItem::new,
-            new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)
+            new Item.Settings().sword(ModToolMaterials.CURSED, 9, -2.7F).rarity(Rarity.UNCOMMON)
     );
 
     public static void init() {
