@@ -31,5 +31,6 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.rip_and_tear.soul_glutton.desc", "Hold [%s] on any entity to absorb their soul. Each time a part of their soul is absorbed and 1 heart is deducted from their maximum health.");
 
         translationBuilder.add(ModEntityTypes.WARPER, "Thrown Warper");
+        translationBuilder.add(ModItems.FATE_CRUSHER, "Fate Crusher");
     }
 }
