@@ -17,6 +17,7 @@ public class ModConfiguration {
     public static final int FATE_CRUSHER_ENTITY_DAMAGE_START_AGE = 4;
     public static final float FATE_CRUSHER_ENTITY_DAMAGE_PER_TICK = 5F;
     public static final float FATE_CRUSHER_ENTITY_AOD_BOX_SIZE = 2F;
+    public static final int FATE_CRUSHER_ITEM_USE_COOLDOWN = 8 * 20; // 8 seconds * 20 ticks/second
 
     // region Look & Feel
 

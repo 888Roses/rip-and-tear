@@ -9,10 +9,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
+import net.rose.rip_and_tear.common.init.ModConfiguration;
 import net.rose.rip_and_tear.common.init.ModEntityTypes;
 import net.rose.rip_and_tear.common.init.ModSoundEvents;
 import net.rose.rip_and_tear.common.util.Mathf;
 import net.rose.rip_and_tear.common.util.SoundUtil;
+
+import static net.rose.rip_and_tear.common.init.ModConfiguration.FATE_CRUSHER_ITEM_USE_COOLDOWN;
 
 public class FateCrusherItem extends Item {
     public FateCrusherItem(Settings settings) {
@@ -22,21 +25,27 @@ public class FateCrusherItem extends Item {
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
         if (world instanceof ServerWorld serverWorld) {
-            var raycast = user.raycast(1000, 0, false);
-            if (raycast.getType() == HitResult.Type.BLOCK) {
-                var entity = ModEntityTypes.FATE_CRUSHER.create(world, SpawnReason.TRIGGERED);
-                entity.setPos(raycast.getPos().x, raycast.getPos().y, raycast.getPos().z);
-                entity.setYaw(user.getYaw());
-                entity.setBodyYaw(user.getBodyYaw());
-                entity.owner = user;
-                entity.pos = raycast.getPos();
-                world.spawnEntity(entity);
+            var result = user.raycast(1000, 0, false);
+            if (result.getType() == HitResult.Type.BLOCK) {
+                var hammerEntity = ModEntityTypes.FATE_CRUSHER.create(world, SpawnReason.TRIGGERED);
+                if (hammerEntity == null) return super.use(world, user, hand);
+
+                hammerEntity.setPos(result.getPos().x, result.getPos().y, result.getPos().z);
+                hammerEntity.setYaw(user.getYaw());
+                hammerEntity.setBodyYaw(user.getBodyYaw());
+
+                hammerEntity.owner = user;
+                hammerEntity.pos = result.getPos();
+
+                world.spawnEntity(hammerEntity);
 
                 SoundUtil.playSound(
-                        serverWorld, null, raycast.getPos(),
+                        serverWorld, null, result.getPos(),
                         ModSoundEvents.FATE_CRUSHER_CRUSH, SoundCategory.PLAYERS,
                         1, Mathf.random(serverWorld, 0.9F, 1.1F)
                 );
+
+                user.getItemCooldownManager().set(user.getStackInHand(hand), FATE_CRUSHER_ITEM_USE_COOLDOWN);
             }
         }
 
