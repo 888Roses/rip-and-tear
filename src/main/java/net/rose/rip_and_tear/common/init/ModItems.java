@@ -28,7 +28,7 @@ public class ModItems {
             new Item.Settings().maxCount(32)
     );
 
-    public static final Item RUNE_MOUTHPIECE = registerItem(
+    public static final Item ORANGE_RUNE = registerItem(
             "orange_rune", RuneItem::new,
             new Item.Settings().maxCount(1)
     );
