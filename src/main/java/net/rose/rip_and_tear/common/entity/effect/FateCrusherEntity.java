@@ -16,15 +16,14 @@ import net.minecraft.world.World;
 
 public class FateCrusherEntity extends Entity {
     public LivingEntity owner;
-    public Vec3d pos;
+    public Vec3d slamPosition;
 
     public LivingEntity getOwner() {
         return owner;
     }
 
-    @Override
-    public Vec3d getPos() {
-        return pos;
+    public Vec3d getSlamPosition() {
+        return slamPosition;
     }
 
     public FateCrusherEntity(EntityType<? extends Entity> entityType, World world) {
@@ -58,7 +57,7 @@ public class FateCrusherEntity extends Entity {
         // Check if the animation matches with dealing damage + if we're on server side.
         if (this.age <= FATE_CRUSHER_ENTITY_DAMAGE_START_AGE || !(world instanceof ServerWorld serverWorld)) return;
 
-        var detectionBox = Box.from(getPos()).expand(FATE_CRUSHER_ENTITY_AOD_BOX_SIZE);
+        var detectionBox = Box.from(getSlamPosition()).expand(FATE_CRUSHER_ENTITY_AOD_BOX_SIZE);
         // For each target in the detection range that isn't this weapon's owner.
         for (var target : serverWorld.getOtherEntities(owner, detectionBox, this::isTarget)) {
             // Deal damage.
