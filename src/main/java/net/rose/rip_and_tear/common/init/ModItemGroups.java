@@ -16,6 +16,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.WARPER);
                         entries.add(ModItems.SOUL_GLUTTON);
+                        entries.add(ModItems.FATE_CRUSHER);
                         entries.add(ModItems.DUSKS_EPITATH_SCULPTURE);
                         entries.add(ModItems.RUNE_BLANK);
                         entries.add(ModItems.RUNE_MOUTHPIECE);
