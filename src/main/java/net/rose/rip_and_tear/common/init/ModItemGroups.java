@@ -18,6 +18,7 @@ public class ModItemGroups {
                         entries.add(ModItems.RUNE_BLANK);
                         entries.add(ModItems.ORANGE_RUNE);
                         entries.add(ModItems.STATUE);
+                        entries.add(ModItems.VOODOO_PUPPET);
                     })
                     .icon(() -> new ItemStack(ModItems.ORANGE_RUNE))
                     .special()

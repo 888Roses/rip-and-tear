@@ -37,5 +37,7 @@ public class CustomItemTooltipRegistry extends AbstractCustomItemTooltipRegistry
             }
     );
 
-    public static void init(){}
+    public static final TooltipInfo VOODOO_PUPPET = of(ModItems.VOODOO_PUPPET, "block.rip_and_tear.voodoo_puppet.desc");
+
+    public static void init() {}
 }

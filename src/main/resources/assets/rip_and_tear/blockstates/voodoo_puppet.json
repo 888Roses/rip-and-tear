@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "rip_and_tear:block/voodoo_puppet"
+    },
+    "facing=east": {
+      "model": "rip_and_tear:block/voodoo_puppet",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "rip_and_tear:block/voodoo_puppet",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "rip_and_tear:block/voodoo_puppet",
+      "y": 270
+    }
+  }
+}

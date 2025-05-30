@@ -2,6 +2,7 @@ package net.rose.rip_and_tear.data.providers;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.rose.rip_and_tear.common.init.ModBlocks;
 import net.rose.rip_and_tear.common.init.ModEntityTypes;
 import net.rose.rip_and_tear.common.init.ModItems;
 import net.minecraft.registry.RegistryWrapper;
@@ -42,5 +43,8 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
         translationBuilder.add("item.rip_and_tear.fate_crusher.desc", "Pressing [%s] slams the looked at position. " +
                 "Any entity in a %s block radius will be dealt %s AOE damage every tick for %s ticks. Bypasses the " +
                 "invincibility frame.");
+
+        translationBuilder.add("block.rip_and_tear.voodoo_puppet", "Voodoo Puppet");
+        translationBuilder.add("block.rip_and_tear.voodoo_puppet.desc", "Placing it in the correct altar creates a connection between merchants and you, allowing the trade of special items in exchange of sacrifices.");
     }
 }

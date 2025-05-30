@@ -1,11 +1,11 @@
 package net.rose.rip_and_tear.common.init;
 
-import static moriyashiine.strawberrylib.api.module.SLibRegistries.registerItem;
-
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.util.Rarity;
 import net.rose.rip_and_tear.common.item.*;
 import net.minecraft.item.Item;
+
+import static moriyashiine.strawberrylib.api.module.SLibRegistries.*;
 
 public class ModItems {
     public static final Item WARPER = registerItem(
@@ -46,6 +46,11 @@ public class ModItems {
     public static final Item FATE_CRUSHER = registerItem(
             "fate_crusher", FateCrusherItem::new,
             new Item.Settings().sword(ModToolMaterials.CURSED, 9, -2.7F).rarity(Rarity.UNCOMMON)
+    );
+
+    public static final Item VOODOO_PUPPET = registerBlockItem(
+            "voodoo_puppet", ModBlocks.VOODOO_PUPPET,
+            new Item.Settings().maxCount(16).rarity(Rarity.RARE)
     );
 
     public static void init() {

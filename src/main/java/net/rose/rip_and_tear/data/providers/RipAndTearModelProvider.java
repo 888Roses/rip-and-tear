@@ -25,5 +25,7 @@ public class RipAndTearModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ORANGE_RUNE, Models.GENERATED);
 
         itemModelGenerator.register(ModItems.FATE_CRUSHER, Models.HANDHELD_MACE);
+
+        itemModelGenerator.register(ModItems.VOODOO_PUPPET, Models.GENERATED);
     }
 }
