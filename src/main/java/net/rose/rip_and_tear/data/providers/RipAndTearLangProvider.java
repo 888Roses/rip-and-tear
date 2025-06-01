@@ -39,12 +39,19 @@ public class RipAndTearLangProvider extends FabricLanguageProvider {
                 "Absorbing the soul of an entity reduces their max health by 1 heart.");
 
         translationBuilder.add(ModEntityTypes.WARPER, "Thrown Warper");
+        translationBuilder.add("item.rip_and_tear.warper.desc", "Pressing [%s] throws the dagger. Hitting an entity " +
+                "swaps the entity's and your position. Pressing [%s] when the dagger is thrown deals %s damage to " +
+                "every entity on the ground, in the path between the dagger and you in a %s meters radius.");
+        translationBuilder.add("item.rip_and_tear.thrown_warper.desc", "Pressing [%s] deals %s damage to every entity" +
+                " on the ground, in the path between the dagger and you in a %s meters radius.");
+
         translationBuilder.add(ModItems.FATE_CRUSHER, "Fate Crusher");
         translationBuilder.add("item.rip_and_tear.fate_crusher.desc", "Pressing [%s] slams the looked at position. " +
                 "Any entity in a %s block radius will be dealt %s AOE damage every tick for %s ticks. Bypasses the " +
                 "invincibility frame.");
 
         translationBuilder.add("block.rip_and_tear.voodoo_puppet", "Voodoo Puppet");
-        translationBuilder.add("block.rip_and_tear.voodoo_puppet.desc", "Placing it in the correct altar creates a connection between merchants and you, allowing the trade of special items in exchange of sacrifices.");
+        translationBuilder.add("block.rip_and_tear.voodoo_puppet.desc", "Placing it in the correct altar creates a " +
+                "connection between merchants and you, allowing the trade of special items in exchange of sacrifices.");
     }
 }

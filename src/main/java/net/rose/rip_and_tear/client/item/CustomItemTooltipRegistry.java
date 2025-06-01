@@ -2,6 +2,7 @@ package net.rose.rip_and_tear.client.item;
 
 import static net.rose.rip_and_tear.common.init.ModConfiguration.*;
 
+import net.rose.rip_and_tear.common.init.ModConfiguration;
 import net.rose.rip_and_tear.common.util.TextUtils;
 import net.rose.rip_and_tear.common.init.ModItems;
 import net.minecraft.client.MinecraftClient;
@@ -27,6 +28,25 @@ public class CustomItemTooltipRegistry extends AbstractCustomItemTooltipRegistry
                     FATE_CRUSHER_ENTITY_AOD_BOX_SIZE + 1,
                     FATE_CRUSHER_ENTITY_DAMAGE_PER_TICK,
                     FATE_CRUSHER_ENTITY_LIFETIME - FATE_CRUSHER_ENTITY_DAMAGE_START_AGE
+            }
+    );
+
+    public static final TooltipInfo WARPER = of(
+            ModItems.WARPER, "item.rip_and_tear.warper.desc",
+            () -> new Object[]{
+                    TextUtils.getKeyText(MinecraftClient.getInstance().options.useKey),
+                    TextUtils.getKeyText(MinecraftClient.getInstance().options.useKey),
+                    THROWN_WARPER_RECALL_DAMAGE,
+                    THROWN_WARPER_RECALL_DAMAGE_RADIUS,
+            }
+    );
+
+    public static final TooltipInfo THROWN_WARPER = of(
+            ModItems.THROWN_WARPER, "item.rip_and_tear.thrown_warper.desc",
+            () -> new Object[]{
+                    TextUtils.getKeyText(MinecraftClient.getInstance().options.useKey),
+                    THROWN_WARPER_RECALL_DAMAGE,
+                    THROWN_WARPER_RECALL_DAMAGE_RADIUS,
             }
     );
 
